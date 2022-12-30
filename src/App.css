@@ -1,0 +1,101 @@
+#root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.App {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.container {
+  height: 100vh;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.new-todo-field {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 0.2fr;
+}
+
+.todo-input-field {
+  height: 4vh;
+}
+
+.add-todo-btn {
+  height: 5vh;
+  letter-spacing: 2px;
+  font-family: bolder;
+}
+
+.todo-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.todo-item {
+  margin: 0.2rem 0;
+  width: 90%;
+  display: grid;
+  padding: 0.5rem;
+  grid-template-columns: 0.1fr 0.8fr 0.1fr;
+  gap: 0.5rem;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: border 0.15s;
+}
+
+.todo-item:hover {
+  border: 2px solid whitesmoke;
+}
+
+.todo-checkbox-field {}
+
+.todo-item label {
+  text-align: left;
+  font-size: 1rem;
+  letter-spacing: 2px;
+}
+
+.todo-delete-btn {
+  font-weight: bolder;
+  border-radius: 8px;
+  font-size: large;
+  border: 2px solid whitesmoke;
+  transition: border 0.15s;
+  cursor: pointer;
+}
+
+.todo-delete-btn:hover {
+  border: 2px solid #747bff;
+}
