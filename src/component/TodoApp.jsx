@@ -1,36 +1,39 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import AddTodo from "./AddTodo";
 import TodoList from "./TodoList";
+import todosReducer from "./todosReducer";
 
-const TodoApp = ({ todos: initialTodos }) => {
-  const [todos, setTodos] = useState(initialTodos);
+let nextId = 4;
+
+const initialTodos = [
+  { id: 1, text: "Learn Javascript", done: true },
+  { id: 2, text: "Learn Tailwind", done: false },
+  { id: 3, text: "Learn React", done: false },
+];
+
+const TodoApp = () => {
+  const [todos, dispatch] = useReducer(todosReducer, initialTodos);
 
   function handleAddTodo(text) {
-    let nextId = 4;
-    setTodos([
-      ...todos,
-      {
-        id: nextId++,
-        text: text,
-        done: false,
-      },
-    ]);
+    dispatch({
+      type: "add",
+      id: nextId++,
+      text,
+    });
   }
 
   function handleTodoChange(updatedTodo) {
-    setTodos(
-      todos.map((todo) => {
-        if (todo.id === updatedTodo.id) {
-          return updatedTodo;
-        } else {
-          return todo;
-        }
-      })
-    );
+    dispatch({
+      type: "change",
+      todo: updatedTodo,
+    });
   }
 
   function handleTodoDelete(todoId) {
-    setTodos(todos.filter((todo) => todo.id !== todoId));
+    dispatch({
+      type: "remove",
+      id: todoId,
+    });
   }
   return (
     <main className="container">
