@@ -1,50 +1,36 @@
-import React, { useReducer } from "react";
+import React, { createContext, useEffect, useReducer, useState } from "react";
 import AddTodo from "./AddTodo";
 import TodoList from "./TodoList";
 import todosReducer from "./todosReducer";
 
-let nextId = 4;
+// const initialTodos = [
+//   { id: 1, text: "Learn Javascript", done: true },
+//   { id: 2, text: "Learn Tailwind", done: false },
+//   { id: 3, text: "Learn React", done: false },
+// ];
 
-const initialTodos = [
-  { id: 1, text: "Learn Javascript", done: true },
-  { id: 2, text: "Learn Tailwind", done: false },
-  { id: 3, text: "Learn React", done: false },
-];
+export const TodosContext = createContext(null);
+export const TodosDispatchContext = createContext(null);
 
 const TodoApp = () => {
+  const [initialTodos, setInitialTodos] = useState([]);
+  useEffect(() => {
+    const savedTodos = localStorage.getItem("TODOS");
+    if (savedTodos) {
+      setInitialTodos(savedTodos);
+    }
+  }, []);
   const [todos, dispatch] = useReducer(todosReducer, initialTodos);
-
-  function handleAddTodo(text) {
-    dispatch({
-      type: "add",
-      id: nextId++,
-      text,
-    });
-  }
-
-  function handleTodoChange(updatedTodo) {
-    dispatch({
-      type: "change",
-      todo: updatedTodo,
-    });
-  }
-
-  function handleTodoDelete(todoId) {
-    dispatch({
-      type: "remove",
-      id: todoId,
-    });
-  }
   return (
-    <main className="container">
-      <h1>Todos</h1>
-      <AddTodo onAddTodo={handleAddTodo} />
-      <TodoList
-        todos={todos}
-        onTodoChange={handleTodoChange}
-        onTodoDelete={handleTodoDelete}
-      />
-    </main>
+    <TodosContext.Provider value={todos}>
+      <TodosDispatchContext.Provider value={dispatch}>
+        <main className="container">
+          <h1>Todos</h1>
+          <AddTodo />
+          <TodoList />
+        </main>
+      </TodosDispatchContext.Provider>
+    </TodosContext.Provider>
   );
 };
 

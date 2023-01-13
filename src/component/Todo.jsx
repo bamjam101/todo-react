@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { TodosDispatchContext } from "./TodoApp";
 
-const Todo = ({ todo, onChange, onDelete }) => {
+const Todo = ({ todo }) => {
+  const dispatch = useContext(TodosDispatchContext);
   return (
     <>
       <input
@@ -10,11 +12,22 @@ const Todo = ({ todo, onChange, onDelete }) => {
         id={`${todo.id}-done`}
         checked={todo.done}
         onChange={(event) => {
-          onChange({ ...todo, done: event.target.checked });
+          dispatch({
+            type: "change",
+            todo: { ...todo, done: event.target.checked },
+          });
         }}
       />
       <label htmlFor={`${todo.id}-done`}>{todo.text}</label>
-      <span onClick={() => onDelete(todo.id)} className="todo-delete-btn">
+      <span
+        onClick={() => {
+          dispatch({
+            type: "remove",
+            id: todo.id,
+          });
+        }}
+        className="todo-delete-btn"
+      >
         X
       </span>
     </>

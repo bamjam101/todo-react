@@ -1,6 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { TodosContext, TodosDispatchContext } from "./TodoApp";
 
-const AddTodo = ({ onAddTodo }) => {
+// let nextId = 4;
+
+const AddTodo = () => {
+  const todos = useContext(TodosContext);
+  let nextId = todos.length + 1;
+  const dispatch = useContext(TodosDispatchContext);
   const [text, setText] = useState("");
   return (
     <div className="new-todo-field">
@@ -17,7 +23,11 @@ const AddTodo = ({ onAddTodo }) => {
       <button
         className="add-todo-btn"
         onClick={() => {
-          onAddTodo(text);
+          dispatch({
+            type: "add",
+            id: nextId++,
+            text,
+          });
           setText("");
         }}
       >
