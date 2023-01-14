@@ -43,6 +43,7 @@
 .new-todo-field {
   width: 100%;
   display: grid;
+  gap: 1rem;
   grid-template-columns: 1fr 0.2fr;
 }
 
@@ -52,8 +53,9 @@
 
 .add-todo-btn {
   height: 5vh;
-  letter-spacing: 2px;
-  font-family: bolder;
+  font-size: large;
+  letter-spacing: 3px;
+  font-weight: bolder;
 }
 
 .todo-list {
@@ -79,8 +81,6 @@
   border: 2px solid whitesmoke;
 }
 
-.todo-checkbox-field {}
-
 .todo-item label {
   text-align: left;
   font-size: 1rem;
@@ -92,10 +92,21 @@
   border-radius: 8px;
   font-size: large;
   border: 2px solid whitesmoke;
-  transition: border 0.15s;
+  transition: border 0.15s, color 0.15s;
   cursor: pointer;
 }
 
 .todo-delete-btn:hover {
-  border: 2px solid #747bff;
+  border: 2px solid tomato;
+  color: tomato;
+}
+
+@media screen and (max-width: 600px) {
+  * {
+    font-size: 90%;
+  }
+
+  .add-todo-btn {
+    font-size: 100%;
+  }
 }
