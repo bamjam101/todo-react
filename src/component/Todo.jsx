@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
-import { TodosDispatchContext } from "./TodoApp";
+import React from "react";
+import { useDispatch } from "../context/Context";
 
 const Todo = ({ todo }) => {
-  const dispatch = useContext(TodosDispatchContext);
+  const dispatch = useDispatch();
   return (
     <>
       <input

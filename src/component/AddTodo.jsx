@@ -1,12 +1,10 @@
-import React, { useContext, useState } from "react";
-import { TodosContext, TodosDispatchContext } from "./TodoApp";
-
-// let nextId = 4;
+import React, { useState } from "react";
+import { useDispatch, useTodos } from "../context/Context";
 
 const AddTodo = () => {
-  const todos = useContext(TodosContext);
+  const todos = useTodos();
   let nextId = todos.length + 1;
-  const dispatch = useContext(TodosDispatchContext);
+  const dispatch = useDispatch();
   const [text, setText] = useState("");
   return (
     <div className="new-todo-field">

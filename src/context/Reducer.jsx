@@ -1,6 +1,4 @@
-import React from "react";
-
-const todosReducer = (todos, action) => {
+const TodosReducer = (todos, action) => {
   const { type } = action;
   switch (type) {
     case "add":
@@ -21,4 +19,4 @@ const todosReducer = (todos, action) => {
   }
 };
 
-export default todosReducer;
+export default TodosReducer;
