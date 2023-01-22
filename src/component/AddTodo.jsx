@@ -2,8 +2,18 @@ import React, { useState } from "react";
 import { useDispatch, useTodos } from "../context/Context";
 
 const AddTodo = () => {
-  const todos = useTodos();
-  let nextId = todos.length + 1;
+  // const todos = useTodos();
+  // let nextId = todos.length;
+  let nextId;
+  let savedIndex = parseInt(localStorage.getItem("NEXT_ID"));
+  if (savedIndex) {
+    nextId = savedIndex + 1;
+    localStorage.setItem("NEXT_ID", nextId);
+    console.log(nextId);
+  } else {
+    nextId = 1;
+    localStorage.setItem("NEXT_ID", nextId);
+  }
   const dispatch = useDispatch();
   const [text, setText] = useState("");
   return (
@@ -23,7 +33,7 @@ const AddTodo = () => {
         onClick={() => {
           dispatch({
             type: "add",
-            id: nextId++,
+            id: nextId,
             text,
           });
           setText("");
